@@ -6,6 +6,10 @@ phases:
       - echo "Preparing the build environment..."
       - chmod +x ./gradlew
       - ./gradlew clean build
+      - echo Checking Docker version...
+      - docker --version
+      - echo Checking AWS CLI version...
+      - aws --version
       - echo Logging in to Amazon ECR...
       - aws --version
       - REPOSITORY_URI=public.ecr.aws/q4r7n5w9/account/repo
