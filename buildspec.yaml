@@ -1,10 +1,12 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - apt-get update && apt-get install -y gradle  # Install Gradle if gradlew is missing
   pre_build:
     commands:
-
-      - ./gradlew clean build
+      - if [ -f ./gradlew ]; then chmod +x ./gradlew; ./gradlew clean build; else gradle clean build; fi  # Use gradlew if available, else Gradle
       - echo Logging in to Amazon ECR...
       - aws --version
       - REPOSITORY_URI=058264489222.dkr.ecr.us-east-1.amazonaws.com/newrepo/boa
