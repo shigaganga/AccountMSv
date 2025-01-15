@@ -16,7 +16,7 @@ import java.util.List;
         private AccountServiceImpl accountsService;
 
         @GetMapping
-        public ResponseEntity<List<Accounts>> getAllAccount() {
+        public ResponseEntity<List<Accounts>> getAllAccounts() {
             return new ResponseEntity<>(accountsService.getAllAccounts(), HttpStatus.OK);
         }
 
