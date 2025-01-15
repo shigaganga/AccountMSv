@@ -2,7 +2,7 @@
 version: 0.2
 
 phases:
-  # Add thi
+  # Add this
   pre_build:
     commands:
       - chmod +x ./gradlew
