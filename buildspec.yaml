@@ -1,8 +1,6 @@
-
 version: 0.2
 
 phases:
-  # Add this
   pre_build:
     commands:
       - chmod +x ./gradlew
@@ -15,18 +13,18 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
-      - echo Build started on date
+      - echo Build started on $(date)
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
-      - echo Build completed on date
+      - echo Build completed on $(date)
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - DOCKER_CONTAINER_NAME=newrepo/boa
+      - DOCKER_CONTAINER_NAME=boa
       - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - echo Printing imagedefinitions.json
       - cat imagedefinitions.json
